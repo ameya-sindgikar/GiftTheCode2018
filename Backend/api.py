@@ -35,11 +35,13 @@ class Stats (Resource):
         cursor = conn.cursor()
         cursor.execute("SELECT sum(Duration) from Users")
         totalHours = cursor.fetchone()[0]
+        cursor.execute("SELECT count(id) from Users")
+        totalUsers = cursor.fetchone()[0]
         print(totalHours)
         conn.commit()
         conn.close()
 
-        output = {"totalHours":totalHours, "totalUsers":1000}
+        output = {"totalHours":totalHours, "totalUsers":totalUsers}
 
         return jsonify({"Result":output})
     
