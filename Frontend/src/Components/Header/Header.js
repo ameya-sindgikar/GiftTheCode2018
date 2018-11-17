@@ -1,6 +1,6 @@
 import React from 'react';
 import './Header.css';
-import logo from '../../Unplugged logo video.mov';
+import logo from '../../logo.svg';
 import data from '../../Data.js';
 
 
@@ -21,17 +21,8 @@ class Header extends React.Component{
     return (
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <p>Total Time: {this.props.totalTime}</p>
+        <p>User Count: {this.props.userCount}</p>
       </header>
     );
   }
