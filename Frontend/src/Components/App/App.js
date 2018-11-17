@@ -4,6 +4,9 @@ import './App.css';
 import Header from '../Header/Header';
 import data from '../../Data.js';
 import Landingpage from '../Landingpage/Landingpage';
+import SetActivity from '../Setactivity/Setactivity';
+import Share from '../Share/share';
+import About from '../About/about';
 
 class App extends React.Component {
   constructor(props) {
@@ -24,8 +27,7 @@ class App extends React.Component {
         startTime: null,
         endTime: null,
         activity: null,
-        socialMedia: null,
-        location: null
+        socialMedia: null
       },
       global: {
         totalTime: null,
@@ -56,27 +58,88 @@ class App extends React.Component {
   setStartTime() {
     const date = new Date();
     let userData = {
-        startTime: date,
+        startTime: date.getTime(),
         endTime: null,
         activity: null,
-        socialMedia: null,
-        location: null
+        socialMedia: null
     }
     this.setState({user: userData})
   }
 
+    setEndTime = () => {
+    const date = new Date();
+    let userData = {
+        startTime: this.state.user.startTime,
+        endTime: date.getTime(),
+        activity: this.state.user.activity,
+        socialMedia: this.state.user.socialMedia
+    }
+    this.setState({user: userData})
+  }
+
+  getDuration = () => {
+    const duration = this.state.user.endTime - this.state.user.startTime;
+    return duration;
+  }
+
+
   render() {
+    const step = this.state.step;
+    let stepComponent = null;
+
+    switch(step) {
+      case this.steps.landingPage:
+      case this.steps.unplugged:
+      // Step 1 - UNPLUG/PLUG
+        stepComponent = <Landingpage updateStep={this.updateStep}
+                                    steps={this.steps}
+                                    currentStep={this.state.step}
+                                    setStartTime={this.setStartTime} />
+        break;
+      //
+
+      // Step 2 - Set Activity
+      case this.steps.setActivity:
+        stepComponent = <SetActivity updateStep={this.updateStep}
+                                     steps={this.steps}
+                                     setEndTime={this.setEndTime}
+                                     getDuration={this.getDuration} />
+        break;
+      //
+
+      // Step 3 - SHARE
+      case this.steps.share:
+        stepComponent = <Share updateStep={this.updateStep}
+                               steps={this.steps} />
+        break;
+      //
+
+      // Step 4 - ABOUT
+      case this.steps.about:
+        stepComponent = <About updateStep={this.updateStep}
+                                steps={this.steps} />
+        break;
+      //
+
+      // ???
+      default: 
+        stepComponent = <h1>Component not found</h1>
+        break;
+    }
+
     return (
       <div className="App">
-      <Header
-      totalTime={this.state.global.totalTime}
-      userCount={this.state.global.userCount} />
-      <p>You are {this.state.step}.</p>
-      <p>You started at {this.state.user.startTime}</p>
-      <Landingpage updateStep={this.updateStep}
-      steps={this.steps}
-      currentStep={this.state.step}
-      setStartTime={this.setStartTime} />
+        <Header
+          totalTime={this.state.global.totalTime}
+          userCount={this.state.global.userCount} />
+
+        <div>
+          <p>You are {this.state.step}</p>
+          <p>You started at {this.state.user.startTime}</p>
+        </div>
+
+        {stepComponent}
+        
       </div>
     );
   }

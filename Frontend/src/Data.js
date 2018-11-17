@@ -10,10 +10,10 @@ const data = {
       userCount: '192K'
     })
   },
-  saveActvity: function(activity, duration, callback) {
+  saveActivity: function(activity, duration, callback) {
     const postData = {
-      activity: 'activity',
-      duration: 'duration'
+      activity: activity,
+      duration: duration
     }
     callback({
       id: 1234
