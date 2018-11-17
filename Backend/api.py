@@ -6,7 +6,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-if os.environ["GTC_MODE"] == "DEBUG":
+if os.environ.get("GTC_MODE", False) == "DEBUG":
     db_path = os.path.join(BASE_DIR, r"C:\sqlite3\dbs\GiftTheCode.db")
 else:
     db_path = os.path.join(BASE_DIR, "/web/Backend/GiftTheCode.db")
