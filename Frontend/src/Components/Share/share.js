@@ -1,6 +1,7 @@
 import React from 'react';
 import './share.css';
 import {InlineShareButtons} from 'sharethis-reactjs';
+import App from '../App/App';
 
 class Share extends React.Component {
   constructor(props) {
@@ -14,17 +15,17 @@ class Share extends React.Component {
   }
 
   setFriend = (event) => {
-      this.state.friend = event.target.value;
+      this.setState({friend: event.target.value});
+      this.forceUpdate()
   }
 
   render() {
     return (
       <div>
         <h3>Share</h3>
-        <form>
             <label>Share with a friend</label>
             <input type='text' onKeyDown={this.setFriend} name='friend' />
-        </form>
+        <p>Hello thats me{this.state.friend}</p>
 
         <InlineShareButtons
           config={{
@@ -44,18 +45,18 @@ class Share extends React.Component {
             radius: 4,            // the corner radius on each button (INTEGER)
             show_total: true,
             size: 40,             // the size of each button (INTEGER)
- 
+
             // OPTIONAL PARAMETERS
             url: window.location.href, // (defaults to current url)
             image: '',  // (defaults to og:image or twitter:image)
-            description: 'This is our custom description',       // (defaults to og:description or twitter:description)
-            title: 'this is our title',            // (defaults to og:title or twitter:title)
+            description: this.props.setActivity,
+            title: 'I unplugged with '+ this.state.friend,
             message: 'this is our email message text',     // (only for email sharing)
             subject: 'this is our email subject text',  // (only for email sharing)
-            username: 'this is our custom twitter username/handle' // (only for twitter sharing)
+            username: this.state.friend // (only for twitter sharing)
           }}
         />
-        
+
       </div>
 
     );

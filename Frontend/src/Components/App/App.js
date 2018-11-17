@@ -122,7 +122,7 @@ class App extends React.Component {
       //
 
       // ???
-      default: 
+      default:
         stepComponent = <h1>Component not found</h1>
         break;
     }
@@ -139,7 +139,7 @@ class App extends React.Component {
         </div>
 
         {stepComponent}
-        
+
       </div>
     );
   }
