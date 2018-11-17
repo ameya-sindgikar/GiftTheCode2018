@@ -2,9 +2,14 @@ from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
 import sqlite3
 import os.path
+import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-db_path = os.path.join(BASE_DIR, r"C:\sqlite3\dbs\GiftTheCode.db")
+
+if os.environ["GTC_MODE"] == "DEBUG":
+    db_path = os.path.join(BASE_DIR, r"C:\sqlite3\dbs\GiftTheCode.db")
+else:
+    db_path = os.path.join(BASE_DIR, "/web/Backend/GiftTheCode.db")
 
 app = Flask(__name__)
 api = Api(app)
@@ -16,7 +21,7 @@ class Users (Resource):
         user_json = user.to_dict()
 
         print(user_json["Name"])
-        
+
 
         conn = sqlite3.connect(db_path)
         cursor = conn.cursor()
@@ -44,7 +49,7 @@ class Stats (Resource):
         output = {"totalHours":totalHours, "totalUsers":totalUsers}
 
         return jsonify({"Result":output})
-    
+
 api.add_resource(Users,'/Users/')
 api.add_resource(Stats,'/Stats/')
 
