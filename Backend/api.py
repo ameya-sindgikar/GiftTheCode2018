@@ -19,20 +19,22 @@ class Users (Resource):
     def post(self):
         user = request.form
         userJson = user.to_dict()
-        
+
         location = userJson["Location"]
         activity = userJson["Activity"]
         duration = userJson["Duration"]
+        latitude = 43.6514
+        longitude = 79.3644
         
-
         conn = sqlite3.connect(db_path)
         cursor = conn.cursor()
-
+    
         cursor.execute("SELECT max(id) from Users") # hacky workaround for maxUserId
         maxUserId = cursor.fetchone()[0]
         row = (maxUserId+1, activity, location, duration) 
+        row = (maxUserId+1, activity, location, duration, latitude, longitude) 
         
-        cursor.execute("INSERT INTO Users VALUES(?, ?, ?, ?)", row)
+        cursor.execute("INSERT INTO Users VALUES(?, ?, ?, ?, ?, ?)", row)
         conn.commit()
         conn.close()
 
@@ -50,7 +52,6 @@ class Stats (Resource):
         totalHours = int(totalHours/3600)
         cursor.execute("SELECT count(id) from Users")
         totalUsers = cursor.fetchone()[0]
-        print(totalHours)
         conn.commit()
         conn.close()
 
