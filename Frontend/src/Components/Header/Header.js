@@ -1,6 +1,6 @@
 import React from 'react';
 import './Header.css';
-import logo from '../../logo.png';
+import logo from '../../logo2.jpg';
 import data from '../../Data.js';
 import { Grid, Row, Col } from 'react-bootstrap';
 import CountUp from 'react-countup';
