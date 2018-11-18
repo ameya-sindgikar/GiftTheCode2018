@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
+from flask_cors import CORS
 from geoip import geolite2
 import sqlite3
 import os.path
@@ -13,6 +14,7 @@ else:
     db_path = os.path.join(BASE_DIR, "/web/Backend/GiftTheCode.db")
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 
 class Users (Resource):
