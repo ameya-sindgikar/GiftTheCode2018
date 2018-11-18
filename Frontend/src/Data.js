@@ -10,8 +10,7 @@ const data = {
           console.log(error);
         }
         var body = JSON.parse(body)
-        var time = body.Result.totalHours;
-        time = time * 3600000;
+        var time = body.Result.duration;
         var users = body.Result.totalUsers;
         console.log(time);
         console.log(users);
