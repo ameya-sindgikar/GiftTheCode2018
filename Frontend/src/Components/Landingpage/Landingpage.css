@@ -9,3 +9,10 @@
     background-color: orange;
     margin: 4rem auto;
 }
+
+.landingPage--main button {
+    display: block;
+    width: 180px;
+    text-align: center;
+    margin: 0 auto;
+}

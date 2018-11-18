@@ -1,9 +1,29 @@
 .setActivity--main {
-    width: 60%;
+    padding-top: 1rem;
+    max-width: 60%;
     margin: 0 auto;
 }
 
 .setActivity--main button {
     display: block;
     width: 100%;
+    margin: 1rem;
+}
+
+.setActivity--main h1 {
+    margin-bottom: 5rem;
+}
+
+.setActivityOther--main h1 {
+    margin-bottom: 5rem;
+}
+
+.setActivityOther--main form {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.setActivityOther--main textarea {
+    margin-bottom: 5rem;
 }

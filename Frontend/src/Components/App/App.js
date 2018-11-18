@@ -163,8 +163,10 @@ class App extends React.Component {
           userCount={this.state.global.userCount} />
 
         {debugViewer}
-
-        {stepComponent}
+        <div className='app--main'>
+          {stepComponent}
+        </div>
+        
 
         <Footer />
 

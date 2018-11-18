@@ -41,42 +41,45 @@ class Share extends React.Component {
           <Row>
             <Col>
               <div className='social--main'>
-              <h1>You spent {durationPretty} unplugged. Share and challenge a friend!</h1>
+                <h1>You spent {durationPretty} unplugged. Share and challenge a friend!</h1>
 
-              <FormGroup>
-                <InputGroup>
-                  <InputGroup.Addon>@</InputGroup.Addon>
-                  <FormControl placeholder="testing" type="text" onChange={this.setFriend}/>
-                </InputGroup>
-              </FormGroup>
+                <FormGroup>
+                  <InputGroup>
+                    <InputGroup.Addon>@</InputGroup.Addon>
+                    <FormControl placeholder="Twitter handle/Facebook user" type="text" onChange={this.setFriend}/>
+                  </InputGroup>
+                </FormGroup>
 
+                <div class="social-icons">
+                  <TwitterShareButton
+                      url={window.location.href}
+                      title={socialTitle}
+                      className="social-icon">
+                      <TwitterIcon
+                        size={92}
+                        round />
+                  </TwitterShareButton>
 
-              <TwitterShareButton
-                  url={window.location.href}
-                  title={socialTitle}
-                  className="social-icon">
-                  <TwitterIcon
-                    size={64}
-                    round />
-                </TwitterShareButton>
+                  <FacebookShareButton
+                      url={window.location.href}
+                      quote={socialTitle}
+                      className="social-icon">
+                      <FacebookIcon
+                      size={92}
+                      round />
+                  </FacebookShareButton>
+                </div>
 
-                <FacebookShareButton
-                  url={window.location.href}
-                  quote={socialTitle}
-                  className="social-icon">
-                  <FacebookIcon
-                    size={64}
-                    round />
-                </FacebookShareButton>
+                <p class="hashbrown">#UnplugtoConnect</p>
               </div>
             </Col>
           </Row>
         </Grid>
 
-        
+
 
       </div>
-    
+
     );
   }
 }
