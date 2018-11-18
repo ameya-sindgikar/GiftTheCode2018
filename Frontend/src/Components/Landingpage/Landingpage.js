@@ -3,6 +3,8 @@ import './Landingpage.css';
 import '../../Data.js';
 import {Button, Grid, Row, Col} from 'react-bootstrap';
 import screenfull from 'screenfull'
+import img from '../../plug.png';
+
 
 class Landingpage extends React.Component {
   constructor(props) {
@@ -53,7 +55,7 @@ class Landingpage extends React.Component {
     let animationClassName = 'landingPage--animation-container';
 
     if (currentStep === this.props.steps.landingPage) {
-      button = <Button id='startBtn' bsStyle='success' onClick={this.start}>Unplug</Button>;
+      button = <div className="pulse2" id='startBtn' onClick={this.start}>Unplug</div>;
       heading = <h1>Join the movement and unplug!</h1>
     } else {
       button = <div className="pulse" id='stopBtn' onClick={this.stop}>Done</div>;
@@ -73,9 +75,11 @@ class Landingpage extends React.Component {
                 {heading}
                 {button}
               </div>
+              
             </Col>
           </Row>
         </Grid>
+        <img src={img} className="landingPage--plugImg" alt="unplug" />
       </div>
     );
   }

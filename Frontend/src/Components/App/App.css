@@ -1,3 +1,7 @@
+body {
+    overflow: hidden;
+}
+
 .show-grid div {
     /* background-color: #f1f1f1; */
 }
