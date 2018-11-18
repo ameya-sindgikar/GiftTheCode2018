@@ -49,7 +49,7 @@ shp = geopandas.read_file(r"C:\Users\Mahesh\Documents\GitHub\GiftTheCode2018\Vis
 
 shp.plot(linestyle="-.", linewidth=0.1);
 plt.plot(df.Longitude,df.Latitude,'r*')
-plt.title("Unplugged and connect participants")
+plt.title("UNPLUGGED TO CONNECT")
 plt.xlabel("Longitude")
 plt.ylabel("Latitude")
 plt.savefig("map.png")
