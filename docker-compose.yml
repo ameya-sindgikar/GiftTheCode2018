@@ -1,0 +1,7 @@
+version: "2"
+services:
+    gtc:
+        container_name: gtc
+        ports:
+            - '5000:5000'
+        image: gtc
