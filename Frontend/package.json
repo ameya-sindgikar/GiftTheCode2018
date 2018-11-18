@@ -9,9 +9,11 @@
     "react-bootstrap": "^0.32.4",
     "react-countup": "^4.0.0",
     "react-dom": "^16.6.3",
+    "react-screenfull": "^0.1.2",
     "react-scripts": "2.1.1",
     "react-share": "^2.3.1",
-    "request": "^2.88.0"
+    "request": "^2.88.0",
+    "screenfull": "^3.3.3"
   },
   "scripts": {
     "start": "react-scripts start",

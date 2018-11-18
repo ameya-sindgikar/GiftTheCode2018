@@ -29,7 +29,7 @@ class Setactivity extends React.Component {
   setActivity(activity) {
     var self = this;
     this.props.setActivity(activity);
-    data.saveActivity(activity, this.props.duration, function(error, response, body) {
+    data.saveActivity(activity, this.props.duration, '', function() {
       //callback
       self.props.updateStep(self.props.steps.share);
     })

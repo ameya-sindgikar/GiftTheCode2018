@@ -2,6 +2,7 @@ import React from 'react';
 import './Landingpage.css';
 import '../../Data.js';
 import {Button, Grid, Row, Col} from 'react-bootstrap';
+import screenfull from 'screenfull'
 
 class Landingpage extends React.Component {
   constructor(props) {
@@ -12,36 +13,66 @@ class Landingpage extends React.Component {
     this.start = () => {
       self.props.setStartTime();
       self.props.updateStep(self.props.steps.unplugged)
+
+      if (screenfull.enabled) {
+        const el = document.getElementById('target');
+        screenfull.request(el);
+      }
     }
 
     this.stop = () => {
       self.props.updateStep(self.props.steps.setActivity)
     }
+
+    this.state = {
+      isFullScreen: false
+    }
   }
+
+  componentDidMount = function() {
+    var self = this;
+    var s = screenfull;
+
+    if (screenfull.enabled) {
+      screenfull.on('change', function(e) {
+        self.setState({isFullScreen: s.isFullscreen});
+
+          if(!s.isFullscreen && self.props.currentStep === self.props.steps.unplugged) {
+            self.stop();
+          }
+        
+      });
+    }
+  }
+
   render() {
     const currentStep = this.props.currentStep;
     
     let button;
     let heading;
+    let animationClassName = 'landingPage--animation-container';
 
     if (currentStep === this.props.steps.landingPage) {
-      button = <Button bsStyle='success' onClick={this.start}>Unplug</Button>;
+      button = <Button id='startBtn' bsStyle='success' onClick={this.start}>Unplug</Button>;
       heading = <h1>Join the movement and unplug!</h1>
     } else {
-      button = <Button bsStyle='danger' onClick={this.stop}>Done</Button>;
-      heading = <h1>Keep this page open, and come back to it once your done!</h1>
+      button = <div className="pulse" id='stopBtn' onClick={this.stop}>Done</div>;
+      heading = <div><h1>Keep this page open, and come back to it once your done!</h1></div>
     }
+
+    if(this.state.isFullScreen) {
+      animationClassName += ' full';
+    }
+
     return (
       <div className='landingPage'>
         <Grid>
           <Row>
             <Col className='landingPage--main'>
-
-              {heading}
-
-              <div className='landingPage--animation-container'></div>
-
-              {button}
+              <div id="target" className={animationClassName}>
+                {heading}
+                {button}
+              </div>
             </Col>
           </Row>
         </Grid>
