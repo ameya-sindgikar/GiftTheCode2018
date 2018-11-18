@@ -13,14 +13,21 @@ class Users (Resource):
 
     def post(self):
         user = request.form
-        user_json = user.to_dict()
-
-        print(user_json["Name"])
+        userJson = user.to_dict()
+        
+        location = userJson["Location"]
+        activity = userJson["Activity"]
+        duration = userJson["Duration"]
         
 
         conn = sqlite3.connect(db_path)
         cursor = conn.cursor()
-        cursor.execute("INSERT INTO Users VALUES(2, 'Basketball', 'Mississauga', 1000)")
+
+        cursor.execute("SELECT max(id) from Users") # hacky workaround for maxUserId
+        maxUserId = cursor.fetchone()[0]
+        row = (maxUserId+1, activity, location, duration) 
+        
+        cursor.execute("INSERT INTO Users VALUES(?, ?, ?, ?)", row)
         conn.commit()
         conn.close()
 
