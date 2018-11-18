@@ -1,6 +1,6 @@
 import React from 'react';
 import './Header.css';
-import logo from '../../logo.svg';
+import logo from '../../logo.png';
 import data from '../../Data.js';
 import { Grid, Row, Col } from 'react-bootstrap';
 import CountUp from 'react-countup';
@@ -44,13 +44,13 @@ class Header extends React.Component{
         <Grid>
           <Row className='show-grid'>
             <Col xs={12} md={8}>
-              <img src={logo} className="header--logo" alt="logo" />
+              <a href="http://www.unplugtoconnect.ca" target="_blank" ><img src={logo} className="header--logo" alt="logo" /></a>
             </Col>
             <Col xs={12} md={4}>
 
                 <Row>
                   <Col xs={12} md={4}>
-                    <div className='count count-users'>
+                    <div className='header--count'>
                       <CountUp
                         start={0}
                         end={this.props.userCount}
@@ -67,11 +67,11 @@ class Header extends React.Component{
                         }}
                         >
                       </CountUp>
-                      <div>Persons Unplugged</div>
+                      <div className='header--count__label'>Participants</div>
                     </div>
                   </Col>
-                  <Col xs={12} md={4} mdOffset={4}>
-                    <div className='count count-time'>
+                  <Col xs={12} md={8} mdOffset={0}>
+                    <div className='header--count'>
                       <CountUp
                         start={0}
                         end={this.props.totalTime}
@@ -84,23 +84,23 @@ class Header extends React.Component{
                         onEnd={() => console.log('Ended! 👏')}
                         onStart={() => console.log('Started! 💨')}
                         formattingFn={(value) => {
-                            return shortEnglishHumanizer(value, { units: ['y', 'mo', 'w', 'd', 'h', 'm'], round: true});
+                            return shortEnglishHumanizer(value, { units: ['y', 'mo', 'w', 'd', 'h', 'm'], round: true, spacer: '' });
                         }}
                         >
                       </CountUp>
-                      <div>Time Unplugged</div>
+                      <div className='header--count__label'>Time Unplugged</div>
                     </div>
                   </Col>
                 </Row>
-                  
+
 
             {/* <p>Total Time: {this.props.totalTime}</p>
             <p>User Count: {this.props.userCount}</p> */}
             </Col>
           </Row>
         </Grid>
-        
-       
+
+
       </header>
     );
   }

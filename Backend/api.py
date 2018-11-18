@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
+from flask_cors import CORS
 from geoip import geolite2
 import sqlite3
 import os.path
@@ -13,6 +14,7 @@ else:
     db_path = os.path.join(BASE_DIR, "/web/Backend/GiftTheCode.db")
 
 app = Flask(__name__)
+CORS(app)
 api = Api(app)
 
 class Users (Resource):
@@ -56,14 +58,13 @@ class Stats (Resource):
         conn = sqlite3.connect(db_path)
         cursor = conn.cursor()
         cursor.execute("SELECT sum(Duration) from Users")
-        totalHours = cursor.fetchone()[0]
-        totalHours = int(totalHours/3600)
+        duration = cursor.fetchone()[0]
         cursor.execute("SELECT count(id) from Users")
         totalUsers = cursor.fetchone()[0]
         conn.commit()
         conn.close()
 
-        output = {"totalHours":totalHours, "totalUsers":totalUsers}
+        output = {"duration":duration, "totalUsers":totalUsers}
 
         return jsonify({"Result":output})
 
