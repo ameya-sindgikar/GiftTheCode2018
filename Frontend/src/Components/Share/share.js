@@ -1,5 +1,6 @@
 import React from 'react';
 import './share.css';
+import humanizeDuration from 'humanize-duration';
 import {
     FacebookShareCount,
     FacebookIcon,
@@ -7,6 +8,7 @@ import {
     TwitterIcon
   } from 'react-share';
 import FacebookShareButton from 'react-share/lib/FacebookShareButton';
+import { Grid, Row, Col, FormGroup, FormControl, InputGroup, InputGroupAddon, InputGroupAddonProps } from 'react-bootstrap';
 
 class Share extends React.Component {
   constructor(props) {
@@ -28,32 +30,46 @@ class Share extends React.Component {
 
     let shareButtons = null;
 
-    
+    const durationPretty = humanizeDuration(this.props.duration, { units: ['y', 'mo', 'w', 'd', 'h', 'm', 's'], round: true});
+
 
     return (
-      <div>
-        <h3>Share</h3>
-            <label>Share with a friend</label>
-            <input type='text' onKeyDown={this.setFriend} name='friend' />
-        <p>Hello thats me{this.state.friend}</p>
+      <div className='social'>
+        <Grid>
+          <Row>
+            <Col>
+              <div className='social--main'>
+              <h1>You spent {durationPretty} unplugged. Share and challenge a friend!</h1>
 
-        <TwitterShareButton
-            url={window.location.href}
-            title={this.state.friend}
-            className="social-icon">
-            <TwitterIcon
-              size={64}
-              round />
-          </TwitterShareButton>
+              <FormGroup>
+                <InputGroup>
+                  <InputGroup.Addon>@</InputGroup.Addon>
+                  <FormControl placeholder="testing" type="text" onChange={this.setFriend}/>
+                </InputGroup>
+              </FormGroup>
 
-          <FacebookShareButton
-            url={window.location.href}
-            quote={this.state.friend}
-            className="social-icon">
-            <FacebookIcon
-              size={64}
-              round />
-          </FacebookShareButton>
+
+              <TwitterShareButton
+                  url={window.location.href}
+                  title={this.state.friend}
+                  className="social-icon">
+                  <TwitterIcon
+                    size={64}
+                    round />
+                </TwitterShareButton>
+
+                <FacebookShareButton
+                  url={window.location.href}
+                  quote={this.state.friend}
+                  className="social-icon">
+                  <FacebookIcon
+                    size={64}
+                    round />
+                </FacebookShareButton>
+              </div>
+            </Col>
+          </Row>
+        </Grid>
 
         
 

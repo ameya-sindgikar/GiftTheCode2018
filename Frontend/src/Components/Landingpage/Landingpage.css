@@ -1,0 +1,11 @@
+.landingPage--main {
+    text-align: center;
+}
+
+.landingPage--animation-container {
+    height: 30rem;
+    width: 30rem;
+    border-radius: 30rem; 
+    background-color: orange;
+    margin: 4rem auto;
+}

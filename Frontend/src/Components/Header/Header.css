@@ -1,4 +1,10 @@
-.App-logo {
+header {
+  margin-bottom: 10rem;
+}
+
+.header--logo {
   width: 100px;
   height: 100px;
 }
+
+

@@ -3,7 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "humanize-duration": "^3.15.3",
+    "numeral": "^2.0.6",
     "react": "^16.6.3",
+    "react-bootstrap": "^0.32.4",
+    "react-countup": "^4.0.0",
     "react-dom": "^16.6.3",
     "react-scripts": "2.1.1",
     "react-share": "^2.3.1",

@@ -6,8 +6,8 @@ const data = {
   },
   getGlobalStats: function(callback) {
     callback({
-      totalTime: '2h',
-      userCount: '192K'
+      totalTime: 1233678587,
+      userCount: 192560
     })
   },
   saveActivity: function(activity, duration, callback) {
@@ -15,6 +15,9 @@ const data = {
       activity: activity,
       duration: duration
     }
+
+    //todo: make request
+
     callback({
       id: 1234
     })

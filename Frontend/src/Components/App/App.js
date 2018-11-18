@@ -2,15 +2,19 @@ import React from 'react';
 import logo from '../../logo.svg';
 import './App.css';
 import Header from '../Header/Header';
+import Footer from '../Footer/footer';
 import data from '../../Data.js';
 import Landingpage from '../Landingpage/Landingpage';
 import SetActivity from '../Setactivity/Setactivity';
 import Share from '../Share/share';
 import About from '../About/about';
+import { Grid, Row, Col } from 'react-bootstrap';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
+
+    this.debug = window.location.search && window.location.search.indexOf('debug');
 
     this.steps = {
       landingPage: 'landingPage',
@@ -24,13 +28,14 @@ class App extends React.Component {
     this.state = {
       step: null,
       user: {
-        startTime: null,
-        endTime: null,
-        activity: null,
+        startTime: 0,
+        endTime: 0,
+        duration: 0,
+        activity: '',
         socialMedia: null
       },
       global: {
-        totalTime: null,
+        totalTime: 0,
         userCount: 0
       }
     };
@@ -59,27 +64,38 @@ class App extends React.Component {
     const date = new Date();
     let userData = {
         startTime: date.getTime(),
-        endTime: null,
-        activity: null,
+        endTime: 0,
+        duration: 0,
+        activity: '',
         socialMedia: null
     }
     this.setState({user: userData})
   }
 
-    setEndTime = () => {
+  setEndTime = () => {
     const date = new Date();
+    const endTime = date.getTime();
+    const duration = endTime - this.state.user.startTime;
     let userData = {
         startTime: this.state.user.startTime,
-        endTime: date.getTime(),
+        endTime: endTime,
+        duration: duration,
         activity: this.state.user.activity,
         socialMedia: this.state.user.socialMedia
     }
     this.setState({user: userData})
   }
 
-  getDuration = () => {
-    const duration = this.state.user.endTime - this.state.user.startTime;
-    return duration;
+  setActivity = (activity) => {
+    let userData = {
+      startTime: this.state.user.startTime,
+      endTime: this.state.user.endTime,
+      duration: this.state.user.duration,
+      activity: activity,
+      socialMedia: this.state.user.socialMedia
+  }
+
+  this.setState({user: userData})
   }
 
 
@@ -100,16 +116,21 @@ class App extends React.Component {
 
       // Step 2 - Set Activity
       case this.steps.setActivity:
+      case this.steps.setActivityOther:
         stepComponent = <SetActivity updateStep={this.updateStep}
                                      steps={this.steps}
+                                     currentStep={this.state.step}
                                      setEndTime={this.setEndTime}
-                                     getDuration={this.getDuration} />
+                                     duration={this.state.user.duration}
+                                     setActivity={this.setActivity}
+                                     activity={this.state.user.activity} />
         break;
       //
 
       // Step 3 - SHARE
       case this.steps.share:
         stepComponent = <Share updateStep={this.updateStep}
+                               duration={this.state.user.duration}
                                steps={this.steps} />
         break;
       //
@@ -127,18 +148,25 @@ class App extends React.Component {
         break;
     }
 
+    let debugViewer = null;
+
+    if(this.debug) {
+      const debugJSON = JSON.stringify(this.state, null, 2);
+      debugViewer = <pre>{debugJSON}</pre>;
+    }
+
     return (
       <div className="App">
+
         <Header
           totalTime={this.state.global.totalTime}
           userCount={this.state.global.userCount} />
 
-        <div>
-          <p>You are {this.state.step}</p>
-          <p>You started at {this.state.user.startTime}</p>
-        </div>
+        {debugViewer}
 
         {stepComponent}
+
+        <Footer />
 
       </div>
     );
