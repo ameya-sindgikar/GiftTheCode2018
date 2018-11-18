@@ -44,7 +44,7 @@ class Header extends React.Component{
         <Grid>
           <Row className='show-grid'>
             <Col xs={12} md={8}>
-              <img src={logo} className="header--logo" alt="logo" />
+              <a href="http://www.unplugtoconnect.ca" target="_blank" ><img src={logo} className="header--logo" alt="logo" /></a>
             </Col>
             <Col xs={12} md={4}>
 
@@ -92,15 +92,15 @@ class Header extends React.Component{
                     </div>
                   </Col>
                 </Row>
-                  
+
 
             {/* <p>Total Time: {this.props.totalTime}</p>
             <p>User Count: {this.props.userCount}</p> */}
             </Col>
           </Row>
         </Grid>
-        
-       
+
+
       </header>
     );
   }

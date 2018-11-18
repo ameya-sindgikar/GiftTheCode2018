@@ -1,6 +1,6 @@
 .setActivity--main {
     padding-top: 1rem;
-    width: 60%;
+    max-width: 60%;
     margin: 0 auto;
 }
 

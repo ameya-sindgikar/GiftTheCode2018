@@ -23,4 +23,25 @@ button {
     min-width: 180px;
 }
 
+.input-group-addon {
+  border-radius: 0;
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+}
 
+.form-control {
+  border-radius: 0;
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  height: 48px;
+  font-size: 2rem;
+}
+
+textarea {
+  margin: 2rem auto!important;
+  border-style: solid!important;
+  border-width: 6px!important;
+  border-color: #51D2B9!important;
+}
