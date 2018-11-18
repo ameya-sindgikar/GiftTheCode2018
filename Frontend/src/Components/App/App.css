@@ -1,3 +1,7 @@
+body {
+    overflow: hidden;
+}
+
 .show-grid div {
     /* background-color: #f1f1f1; */
 }
@@ -22,6 +26,10 @@ button {
     font-size: 2rem!important;
     min-width: 180px;
 }
+
+.btn:focus {
+    outline: none;
+  }
 
 .input-group-addon {
   border-radius: 0;

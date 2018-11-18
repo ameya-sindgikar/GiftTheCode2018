@@ -58,14 +58,13 @@ class Stats (Resource):
         conn = sqlite3.connect(db_path)
         cursor = conn.cursor()
         cursor.execute("SELECT sum(Duration) from Users")
-        totalHours = cursor.fetchone()[0]
-        totalHours = int(totalHours/3600)
+        duration = cursor.fetchone()[0]
         cursor.execute("SELECT count(id) from Users")
         totalUsers = cursor.fetchone()[0]
         conn.commit()
         conn.close()
 
-        output = {"totalHours":totalHours, "totalUsers":totalUsers}
+        output = {"duration":duration, "totalUsers":totalUsers}
 
         return jsonify({"Result":output})
 
