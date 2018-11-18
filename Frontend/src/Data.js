@@ -23,17 +23,22 @@ const data = {
         
     });
   },
-  saveActivity: function(activity, duration, callback) {
+  saveActivity: function(activity, location, duration, callback) {
     const postData = {
       activity: activity,
+      location: location,
       duration: duration
     }
 
-    //todo: make request
-
-    callback({
-      id: 1234
+    request.post({url:'http://127.0.0.1:5000/Users/', form: {Activity:activity, Location:location, Duration:duration}}, function(error,response,body){ 
+      if (error){
+        console.log(error);
+      }
+      callback({
+        id: 1234
+      })
     })
+    
   }
 };
 
