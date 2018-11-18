@@ -44,12 +44,20 @@ shp = geopandas.read_file(r"C:\Users\Mahesh\Documents\GitHub\GiftTheCode2018\Vis
 
 # for point in df["Coordinates"]:
 # 	for province in shp.geometry:
+# 		count = 0
 # 		print (point.within(province))
+# 		if (point.within(province)):
+#  			count = count + 1
+# 		else:
+#  			count= count
+# 		shp["usernum"] = count
+# print (shp["usernum"], shp["PRENAME"])
+
 
 
 shp.plot(linestyle="-.", linewidth=0.1);
 plt.plot(df.Longitude,df.Latitude,'r*')
-plt.title("UNPLUGGED TO CONNECT")
+plt.title("UNPLUG TO CONNECT")
 plt.xlabel("Longitude")
 plt.ylabel("Latitude")
 plt.savefig("map.png")
