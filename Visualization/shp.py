@@ -16,8 +16,7 @@ df['Coordinates'] = df['Coordinates'].apply(Point)
 
 #gdf = geopandas.GeoDataFrame(df, geometry='Coordinates')
 #print(df.head())
-shp = geopandas.read_file(r"C:\Users\Mahesh\Downloads\canada\gpr_000b11a_e.shp")
-
+shp = geopandas.read_file(r"C:\Users\Mahesh\Documents\GitHub\GiftTheCode2018\CanadaSHP\gpr_000b11a_e.shp")
 shp.plot();
-plt.plot(df.Longitude,df.Latitude,'ro')
+plt.plot(df.Longitude,df.Latitude,'g*')
 plt.show();
