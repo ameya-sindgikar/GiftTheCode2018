@@ -1,6 +1,7 @@
 import React from 'react';
 import './Landingpage.css';
 import '../../Data.js';
+import {Button, Grid, Row, Col} from 'react-bootstrap';
 
 class Landingpage extends React.Component {
   constructor(props) {
@@ -9,12 +10,11 @@ class Landingpage extends React.Component {
     const self = this;
 
     this.start = () => {
-      console.log('Heyoooooo');
+      self.props.setStartTime();
       self.props.updateStep(self.props.steps.unplugged)
     }
 
     this.stop = () => {
-      self.props.setStartTime()
       self.props.updateStep(self.props.steps.setActivity)
     }
   }
@@ -22,15 +22,29 @@ class Landingpage extends React.Component {
     const currentStep = this.props.currentStep;
     
     let button;
+    let heading;
+
     if (currentStep === this.props.steps.landingPage) {
-      button = <button type='button' onClick={this.start}>START!</button>;
+      button = <Button bsStyle='success' onClick={this.start}>Unplug</Button>;
+      heading = <h1>Join the movement and unplug!</h1>
     } else {
-      button = <button type='button' onClick={this.stop}>STOPPP!</button>;
+      button = <Button bsStyle='danger' onClick={this.stop}>Done</Button>;
+      heading = <h1>Keep this page open, and come back to it once your done!</h1>
     }
     return (
-      <div>
-        <h1>This is the Landing Page!!!! Welcome</h1>
-        {button}
+      <div className='landingPage'>
+        <Grid>
+          <Row>
+            <Col className='landingPage--main'>
+
+              {heading}
+
+              <div className='landingPage--animation-container'></div>
+
+              {button}
+            </Col>
+          </Row>
+        </Grid>
       </div>
     );
   }

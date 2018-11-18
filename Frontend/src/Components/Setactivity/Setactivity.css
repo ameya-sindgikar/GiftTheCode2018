@@ -1,0 +1,9 @@
+.setActivity--main {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.setActivity--main button {
+    display: block;
+    width: 100%;
+}
