@@ -1,6 +1,6 @@
 import React from 'react';
 import './footer.css';
-import logo from '../../logo.svg';
+import logo from '../../logo.png';
 import { Grid, Row, Col } from 'react-bootstrap';
 
 
@@ -18,7 +18,10 @@ class Footer extends React.Component{
         <Grid>
           <Row className='show-grid'>
             <Col xs={12} md={8}>
-                © 2018 Boys and Girls Clubs of Canada 
+              <div className="footer--copy">
+              © 2018 Boys and Girls Clubs of Canada 
+              </div>
+                
             </Col>
             <Col xs={12} md={4}>
               <img src={logo} className="footer--logo" alt="logo" />

@@ -56,29 +56,29 @@ class Setactivity extends React.Component {
             <Row>
               <Col>
                 <div className='setActivity--main'>
-                  <h1>Amazing! You unplugged for <big>{durationPretty}</big>! What did you do?</h1>
+                  <h1>Amazing! You unplugged for <span className='emphasis'>{durationPretty}</span>!<br/> What did you do?</h1>
                   <Row>
-                    <Col md={5}>
-                      <Button onClick={this.selectActivity.bind(null, 'Physical Activity')}>Physical Activity</Button>
+                    <Col md={6}>
+                      <Button bsStyle='success' onClick={this.selectActivity.bind(null, 'Physical Activity')}>Physical Activity</Button>
                     </Col>
-                    <Col md={5} mdOffset={2}>
-                      <Button onClick={this.selectActivity.bind(null, 'Family Time')}>Family Time</Button>
+                    <Col md={6} mdOffset={0}>
+                      <Button bsStyle='warning' onClick={this.selectActivity.bind(null, 'Family Time')}>Family Time</Button>
                     </Col>
                   </Row>
                   <Row>
-                    <Col md={5}>
-                      <Button onClick={this.selectActivity.bind(null, 'Personal Time')}>Personal Time</Button>
+                    <Col md={6}>
+                      <Button bsStyle='warning' onClick={this.selectActivity.bind(null, 'Personal Time')}>Personal Time</Button>
                     </Col>
-                    <Col md={5} mdOffset={2}>
-                      <Button onClick={this.selectActivity.bind(null, 'Community Activity')}>Community Activity</Button>
+                    <Col md={6} mdOffset={0}>
+                      <Button bsStyle='success' onClick={this.selectActivity.bind(null, 'Community Activity')}>Community Activity</Button>
                     </Col>
                   </Row>
                   <Row>
-                    <Col md={5}>
-                      <Button onClick={this.selectActivity.bind(null, 'Socializing')}>Socializing</Button>
+                    <Col md={6}>
+                      <Button bsStyle='success' onClick={this.selectActivity.bind(null, 'Socializing')}>Socializing</Button>
                     </Col>
-                    <Col md={5} mdOffset={2}>
-                      <Button onClick={this.selectActivity.bind(null, 'Other')}>Other</Button>
+                    <Col md={6} mdOffset={0}>
+                      <Button bsStyle='warning' onClick={this.selectActivity.bind(null, 'Other')}>Other</Button>
                     </Col>
                   </Row>
                 </div>
@@ -92,12 +92,12 @@ class Setactivity extends React.Component {
           <Row>
             <Col>
               <div className='setActivityOther--main'>
-                <h1>Amazing! You unplugged for <big>{durationPretty}</big>! What did you do?</h1>
+                <h1>Amazing! You unplugged for <span className='emphasis'>{durationPretty}</span>!<br/> What did you do?</h1>
                 <form onSubmit={this.handleOtherSubmit}>
                   <FormGroup controlId="formControlsTextarea">
-                    <FormControl componentClass="textarea" onChange={this.handleOtherInput} placeholder="textarea" />
+                    <FormControl componentClass="textarea" placeholder="Let's us know what you did while you unplugged today..." onChange={this.handleOtherInput} />
                   </FormGroup>
-                  <Button type="submit">Submit</Button>
+                  <Button bsStyle='danger' type="submit">Submit</Button>
                 </form>
               </div>
             </Col>

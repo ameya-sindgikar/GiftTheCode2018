@@ -1,3 +1,26 @@
 .show-grid div {
-    background-color: #f1f1f1;
+    /* background-color: #f1f1f1; */
 }
+
+.app--main {
+    min-height: 485px;
+}
+
+.emphasis {
+    font-size: 4rem;
+    font-weight: bold;
+}
+
+h1 {
+    text-align: center;
+    line-height: 6rem;
+}
+
+button {
+    text-transform: uppercase;
+    border-radius: 5rem!important;
+    font-size: 2rem!important;
+    min-width: 180px;
+}
+
+
