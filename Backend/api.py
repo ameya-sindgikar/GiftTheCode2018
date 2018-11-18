@@ -47,6 +47,7 @@ class Stats (Resource):
         cursor = conn.cursor()
         cursor.execute("SELECT sum(Duration) from Users")
         totalHours = cursor.fetchone()[0]
+        totalHours = int(totalHours/3600)
         cursor.execute("SELECT count(id) from Users")
         totalUsers = cursor.fetchone()[0]
         print(totalHours)
