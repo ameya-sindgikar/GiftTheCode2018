@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
+from geoip import geolite2
 import sqlite3
 import os.path
 import os
@@ -23,15 +24,22 @@ class Users (Resource):
         location = userJson["Location"]
         activity = userJson["Activity"]
         duration = userJson["Duration"]
-        latitude = 43.6514
-        longitude = 79.3644
-        
+        ip_addrr = request.remote_addr
+
+        result = geolite2.lookup(ip_addrr)
+        latitude, longitude = 0.000, 0.000
+
+        if result is not None:
+            latitude, longitude = result.Location
+
+        if not duration:
+            duration = 0
+
         conn = sqlite3.connect(db_path)
         cursor = conn.cursor()
     
         cursor.execute("SELECT max(id) from Users") # hacky workaround for maxUserId
         maxUserId = cursor.fetchone()[0]
-        row = (maxUserId+1, activity, location, duration) 
         row = (maxUserId+1, activity, location, duration, latitude, longitude) 
         
         cursor.execute("INSERT INTO Users VALUES(?, ?, ?, ?, ?, ?)", row)
