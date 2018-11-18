@@ -15,23 +15,25 @@ class Share extends React.Component {
     super(props);
 
     this.state = {
-        friend: 'empty',
-        friendSet: false
+        friend: ''
     }
 
     this.setFriend = this.setFriend.bind(this);
   }
 
   setFriend = (event) => {
-      this.setState({friend: event.target.value, friendSet: true});
+      this.setState({friend: event.target.value});
   }
 
   render() {
-
-    let shareButtons = null;
-
+    let socialTitle = null;
     const durationPretty = humanizeDuration(this.props.duration, { units: ['y', 'mo', 'w', 'd', 'h', 'm', 's'], round: true});
 
+    if(this.state.friend) {
+      socialTitle = 'I just spent '+durationPretty+' unplugged, I challenge @'+this.state.friend+' to beat my score! Goodluck!';
+    } else {
+      socialTitle = 'I just spent '+durationPretty+' unplugged, try beating my score!';
+    }
 
     return (
       <div className='social'>
@@ -51,7 +53,7 @@ class Share extends React.Component {
 
               <TwitterShareButton
                   url={window.location.href}
-                  title={this.state.friend}
+                  title={socialTitle}
                   className="social-icon">
                   <TwitterIcon
                     size={64}
@@ -60,7 +62,7 @@ class Share extends React.Component {
 
                 <FacebookShareButton
                   url={window.location.href}
-                  quote={this.state.friend}
+                  quote={socialTitle}
                   className="social-icon">
                   <FacebookIcon
                     size={64}
