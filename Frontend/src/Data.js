@@ -5,10 +5,23 @@ const data = {
     request('http://www.google.com', callback);
   },
   getGlobalStats: function(callback) {
-    callback({
-      totalTime: 1233678587,
-      userCount: 192560
-    })
+    request('http://127.0.0.1:5000/Stats/', function(error, response, body){
+        if (error){
+          console.log(error);
+        }
+        var body = JSON.parse(body)
+        var time = body.Result.totalHours;
+        time = time * 3600000;
+        var users = body.Result.totalUsers;
+        console.log(time);
+        console.log(users);
+        
+        callback({
+          totalTime: time,
+          userCount: users
+        })
+        
+    });
   },
   saveActivity: function(activity, duration, callback) {
     const postData = {
