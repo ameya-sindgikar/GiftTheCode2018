@@ -3,8 +3,21 @@ header {
 }
 
 .header--logo {
-  width: 100px;
-  height: 100px;
+  width: 350px;
+  margin-top: 1rem;
 }
 
+.header--count {
+  text-align: center;
+  margin-top: 2.4rem;
+  color: orange;
+}
+
+.header--count__label {
+  font-size: 1.6rem;
+}
+
+.header--count span {
+  font-size: 3rem;
+}
 
