@@ -22,7 +22,7 @@ const data = {
         
     });
   },
-  saveActivity: function(activity, location, duration, callback) {
+  saveActivity: function(activity, duration, location, callback) {
     const postData = {
       activity: activity,
       location: location,
