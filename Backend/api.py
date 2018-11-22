@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_restful import Resource, Api
 from flask_cors import CORS
 from geoip import geolite2
@@ -39,11 +39,11 @@ class Users (Resource):
 
         conn = sqlite3.connect(db_path)
         cursor = conn.cursor()
-    
+
         cursor.execute("SELECT max(id) from Users") # hacky workaround for maxUserId
         maxUserId = cursor.fetchone()[0]
-        row = (maxUserId+1, activity, location, duration, latitude, longitude) 
-        
+        row = (maxUserId+1, activity, location, duration, latitude, longitude)
+
         cursor.execute("INSERT INTO Users VALUES(?, ?, ?, ?, ?, ?)", row)
         conn.commit()
         conn.close()
@@ -71,5 +71,21 @@ class Stats (Resource):
 api.add_resource(Users,'/Users/')
 api.add_resource(Stats,'/Stats/')
 
+@app.route('/static/css/<path:filename>')
+def cssthing(filename):
+    return send_from_directory('/var/www/html/static/css', filename)
+
+@app.route('/static/js/<path:filename>')
+def js_thing(filename):
+    return send_from_directory('/var/www/html/static/js', filename)
+
+@app.route('/static/media/<path:filename>')
+def media_thing(filename):
+    return send_from_directory('/var/www/html/static/media', filename)
+
+@app.route('/<path:filename>')
+def download_file(filename):
+    return send_from_directory('/var/www/html/', filename)
+
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', debug=True)
+    app.run(host='0.0.0.0', debug=True, port=os.environ.get("PORT", 5000))
